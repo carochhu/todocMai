@@ -15,8 +15,10 @@ import androidx.test.runner.AndroidJUnit4;
 import com.cleanup.todoc.database.dao.ProjectDao;
 import com.cleanup.todoc.database.dao.TaskDao;
 import com.cleanup.todoc.database.dao.TodocDatabase;
+import com.cleanup.todoc.databinding.ActivityMainBinding;
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
+import com.cleanup.todoc.ui.MainActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -58,18 +60,19 @@ public class TaskDaoTest {
     @Test
     public void insertAndGetTask() throws InterruptedException {
         //Adding a new task
-        //Project project1 = new Project(4L,"Projet 1", 0xFFA3CED2);
-        //projectDao.createProject(project1);
-        Task task1 = new Task(1L, "task 1", new Date().getTime());
-        Task task2 = new Task(2L, "task 2", new Date().getTime());
+        Project project1 = new Project(4L,"Projet 1", 0xFFA3CED2);
+        projectDao.createProject(project1);
+        Task task1 = new Task(4L, "task 1", new Date().getTime());
+        Task task2 = new Task(4L, "task 2", new Date().getTime());
         taskDao.insertTask(task1);
         taskDao.insertTask(task2);
         // TEST
-        List<Task> taskList = (List<Task>) LiveDataTestUtil.getValue((LiveData)database.taskDao().getTasks());
+        //List<Task> taskList = TodocDatabase.getInstance(this).taskDao().getTasks();
+        List<Task> taskList = TodocDatabase.getInstance(MainActivity).taskDao().getTasks();
         assertEquals(2, taskList.size());
-        assertEquals(1L, taskList.get(0).getProjectId());
+        assertEquals(4L, taskList.get(0).getProjectId());
         assertEquals(task1.getName(), taskList.get(0).getName());
-        assertEquals(2L, taskList.get(1).getProjectId());
+        assertEquals(4L, taskList.get(1).getProjectId());
         assertEquals(task2.getName(), taskList.get(1).getName());
     }
 
@@ -78,12 +81,12 @@ public class TaskDaoTest {
         //Adding a new task
         Project project1 = new Project(4L,"Projet 1", 0xFFA3CED2);
         projectDao.createProject(project1);
-        Task taskToDelete = new Task(1, "task 1", new Date().getTime());
+        Task taskToDelete = new Task(4L, "task 1", new Date().getTime());
         long taskId = taskDao.insertTask(taskToDelete);
         //TEST
         List<Task> tasks = taskDao.getTasks();
         taskDao.deleteTask(tasks.get((int)taskId));
-        List<Task> taskList = (List<Task>) LiveDataTestUtil.getValue((LiveData)database.taskDao().getTasks());
+        List<Task> taskList = TodocDatabase.getInstance(MainActivity).taskDao().getTasks();
         assertTrue(taskList.isEmpty());
     }
 
