@@ -67,7 +67,6 @@ public class TaskDaoTest {
         taskDao.insertTask(task1);
         taskDao.insertTask(task2);
         // TEST
-        //List<Task> taskList = TodocDatabase.getInstance(this).taskDao().getTasks();
         List<Task> taskList = TodocDatabase.getInstance(MainActivity).taskDao().getTasks();
         assertEquals(2, taskList.size());
         assertEquals(4L, taskList.get(0).getProjectId());
@@ -89,6 +88,7 @@ public class TaskDaoTest {
         List<Task> taskList = TodocDatabase.getInstance(MainActivity).taskDao().getTasks();
         assertTrue(taskList.isEmpty());
     }
+
 
 
     @Test
