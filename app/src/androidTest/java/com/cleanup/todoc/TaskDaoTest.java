@@ -10,6 +10,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 import androidx.test.InstrumentationRegistry;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.cleanup.todoc.database.dao.ProjectDao;
@@ -46,7 +47,7 @@ public class TaskDaoTest {
 
     @Before
     public void initDb() throws Exception {
-        Context context = androidx.test.core.app.ApplicationProvider.getApplicationContext();
+        Context context = ApplicationProvider.getApplicationContext();
         database = Room.inMemoryDatabaseBuilder(context, TodocDatabase.class).build();
         taskDao = database.taskDao();
         projectDao = database.projectDao();
@@ -66,13 +67,13 @@ public class TaskDaoTest {
         Task task2 = new Task(4L, "task 2", new Date().getTime());
         taskDao.insertTask(task1);
         taskDao.insertTask(task2);
+        List<Task> tasks2 = taskDao.getTasks();
         // TEST
-        List<Task> taskList = TodocDatabase.getInstance(MainActivity).taskDao().getTasks();
-        assertEquals(2, taskList.size());
-        assertEquals(4L, taskList.get(0).getProjectId());
-        assertEquals(task1.getName(), taskList.get(0).getName());
-        assertEquals(4L, taskList.get(1).getProjectId());
-        assertEquals(task2.getName(), taskList.get(1).getName());
+        assertEquals(2, tasks2.size());
+        assertEquals(4L, tasks2.get(0).getProjectId());
+        assertEquals(task1.getName(), tasks2.get(0).getName());
+        assertEquals(4L, tasks2.get(1).getProjectId());
+        assertEquals(task2.getName(), tasks2.get(1).getName());
     }
 
     @Test
@@ -80,13 +81,14 @@ public class TaskDaoTest {
         //Adding a new task
         Project project1 = new Project(4L,"Projet 1", 0xFFA3CED2);
         projectDao.createProject(project1);
-        Task taskToDelete = new Task(4L, "task 1", new Date().getTime());
-        long taskId = taskDao.insertTask(taskToDelete);
+        Task taskToDelete = new Task(4L, "task 10", new Date().getTime());
+        taskDao.insertTask(taskToDelete);
+        List<Task> tasks1 = taskDao.getTasks();
+        long taskId = taskToDelete.getId();
         //TEST
-        List<Task> tasks = taskDao.getTasks();
-        taskDao.deleteTask(tasks.get((int)taskId));
-        List<Task> taskList = TodocDatabase.getInstance(MainActivity).taskDao().getTasks();
-        assertTrue(taskList.isEmpty());
+        taskDao.deleteTask(tasks1.get((int)taskId));
+        List<Task> tasks2 = taskDao.getTasks();
+        assertEquals(0,tasks2.size());
     }
 
 
