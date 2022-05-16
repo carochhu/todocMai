@@ -1,25 +1,19 @@
 package com.cleanup.todoc;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-import android.content.ClipData;
 import android.content.Context;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
-import androidx.lifecycle.LiveData;
 import androidx.room.Room;
-import androidx.test.InstrumentationRegistry;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.cleanup.todoc.database.dao.ProjectDao;
 import com.cleanup.todoc.database.dao.TaskDao;
 import com.cleanup.todoc.database.dao.TodocDatabase;
-import com.cleanup.todoc.databinding.ActivityMainBinding;
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
-import com.cleanup.todoc.ui.MainActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -38,8 +32,8 @@ public class TaskDaoTest {
     // FOR DATA
     private TodocDatabase database;
     // DATA SET FOR TEST
-    private static long PROJECT_ID = 1;
-    private static Project PROJECT_DEMO = new Project(PROJECT_ID, "Philippe", 11221149);
+    private static final long PROJECT_ID = 1;
+    private static final Project PROJECT_DEMO = new Project(PROJECT_ID, "Philippe", 11221149);
 
 
     @Rule

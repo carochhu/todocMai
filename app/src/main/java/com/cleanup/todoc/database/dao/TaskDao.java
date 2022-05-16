@@ -2,7 +2,6 @@ package com.cleanup.todoc.database.dao;
 
 import android.database.Cursor;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -25,11 +24,11 @@ public interface TaskDao {
     Cursor getTasksWithCursor(long projectId);
 
     @Insert
-    long insertTask(Task task);
+    void insertTask(Task task);
 
     @Update
     int updateTask(Task task);
 
     @Delete
-    int deleteTask(Task task);
+    void deleteTask(Task task);
 }

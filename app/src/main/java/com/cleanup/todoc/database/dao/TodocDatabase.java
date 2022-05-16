@@ -10,7 +10,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
-import com.cleanup.todoc.ui.MainActivity;
 
 import java.util.concurrent.Executors;
 

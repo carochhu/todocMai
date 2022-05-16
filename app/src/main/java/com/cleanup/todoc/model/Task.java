@@ -27,7 +27,6 @@ public class Task {
     private long id;
     @ColumnInfo(name = "projectId",index = true)
     private long projectId;
-    @SuppressWarnings("NullableProblems")
     @NonNull
     private String name;
     private long creationTimestamp;
