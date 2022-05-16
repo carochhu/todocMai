@@ -27,12 +27,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <p>Home activity of the application which is displayed when the user opens the app.</p>
- * <p>Displays the list of tasks.</p>
- *
- * @author Gaëtan HERFRAY
- */
+// Home activity of the application which is displayed when the user opens the app
+// Displays the list of tasks
 public class MainActivity extends AppCompatActivity implements TasksAdapter.DeleteTaskListener {
 
     // The adapter which handles the list of tasks
@@ -127,11 +123,8 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         updateTasks();
     }
 
-    /**
-     * Called when the user clicks on the positive button of the Create Task Dialog.
-     *
-     * @param dialogInterface the current displayed dialog
-     */
+    //  Called when the user clicks on the positive button of the Create Task Dialog.
+    // @param dialogInterface the current displayed dialog
     private void onPositiveButtonClick(DialogInterface dialogInterface) {
         // If dialog is open
         if (dialogEditText != null && dialogSpinner != null) {
@@ -173,9 +166,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         }
     }
 
-    /**
-     * Shows the Dialog for adding a Task
-     */
+    // Shows the Dialog for adding a Task
     private void showAddTaskDialog() {
         final AlertDialog dialog = getAddTaskDialog();
 
@@ -187,19 +178,14 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         populateDialogSpinner();
     }
 
-    /**
-     * Adds the given task to the list of created tasks.
-     *
-     * @param task the task to be added to the list
-     */
+    // Adds the given task to the list of created tasks.
+    // @param task the task to be added to the list
     private void addTask(@NonNull Task task) {
         TodocDatabase.getInstance(this).taskDao().insertTask(task);
         updateTasks();
     }
 
-    /**
-     * Updates the list of tasks in the UI
-     */
+    // Updates the list of tasks in the UI
     private void updateTasks() {
         List<Task> tasks = TodocDatabase.getInstance(this).taskDao().getTasks();
         if (tasks.size() == 0) {
@@ -227,11 +213,8 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         }
     }
 
-    /**
-     * Returns the dialog allowing the user to create a new task.
-     *
-     * @return the dialog allowing the user to create a new task
-     */
+    // Returns the dialog allowing the user to create a new task.
+    // @return the dialog allowing the user to create a new task
     @NonNull
     private AlertDialog getAddTaskDialog() {
         final AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this, R.style.Dialog);
@@ -257,9 +240,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         return dialog;
     }
 
-    /**
-     * Sets the data of the Spinner with projects to associate to a new task
-     */
+    // Sets the data of the Spinner with projects to associate to a new task
     private void populateDialogSpinner() {
         final ArrayAdapter<Project> adapter = new ArrayAdapter<>
                 (this, android.R.layout.simple_spinner_item, TodocDatabase.getInstance(this).projectDao().getProjects());
@@ -270,29 +251,17 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         }
     }
 
-    /**
-     * List of all possible sort methods for task
-     */
+    // List of all possible sort methods for task
     private enum SortMethod {
-        /**
-         * Sort alphabetical by name
-         */
+        // Sort alphabetical by name
         ALPHABETICAL,
-        /**
-         * Inverted sort alphabetical by name
-         */
+        // Inverted sort alphabetical by name
         ALPHABETICAL_INVERTED,
-        /**
-         * Lastly created first
-         */
+        //  Lastly created first
         RECENT_FIRST,
-        /**
-         * First created first
-         */
+        // First created first
         OLD_FIRST,
-        /**
-         * No sort
-         */
+        // No sort
         NONE
     }
 }

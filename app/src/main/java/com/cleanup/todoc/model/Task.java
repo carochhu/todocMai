@@ -1,6 +1,4 @@
 package com.cleanup.todoc.model;
-
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
@@ -11,18 +9,12 @@ import androidx.room.PrimaryKey;
 
 import java.util.Comparator;
 
-/**
- * <p>Model for the tasks of the application.</p>
- *
- * @author Gaëtan HERFRAY
- */
+// Model for the tasks of the application
 @Entity(foreignKeys = @ForeignKey(entity = Project.class,
             parentColumns = "id",
             childColumns = "projectId"))
 public class Task {
-    /**
-     * The unique identifier of the task
-     */
+    // The unique identifier of the task
     @PrimaryKey(autoGenerate = true)
     private long id;
     @ColumnInfo(name = "projectId",index = true)
@@ -35,16 +27,11 @@ public class Task {
     public long getProjectId() { return projectId; }
     public long getCreationTimestamp() { return creationTimestamp; }
 
-
-
-    /**
-     * Instantiates a new Task.
-     *
-     * @param id                the unique identifier of the task to set
-     * @param projectId         the unique identifier of the project associated to the task to set
-     * @param name              the name of the task to set
-     * @param creationTimestamp the timestamp when the task has been created to set
-     */
+    // Instantiates a new Task.
+    // @param id                the unique identifier of the task to set
+    // @param projectId         the unique identifier of the project associated to the task to set
+    // @param name              the name of the task to set
+    // @param creationTimestamp the timestamp when the task has been created to set
     public Task(long id, long projectId, @NonNull String name, long creationTimestamp) {
         this.setId(id);
         this.setProjectId(projectId);
@@ -60,40 +47,21 @@ public class Task {
     }
 
     //GETTER
-    public long getId() {
-        return id;
-    }
+    public long getId() { return id; }
     @Nullable
-    public Project getProject() {
-        return Project.getProjectById(projectId);
-    }
+    public Project getProject() { return Project.getProjectById(projectId); }
     @NonNull
-    public String getName() {
-        return name;
-    }
-    public Boolean getSelected() {
-        return isSelected;
-    }
+    public String getName() { return name; }
+    public Boolean getSelected() { return isSelected; }
 
     //SETTER
-    private void setId(long id) {
-        this.id = id;
-    }
-    private void setProjectId(long projectId) {
-        this.projectId = projectId;
-    }
-    private void setName(@NonNull String name) {
-        this.name = name;
-    }
-    private void setCreationTimestamp(long creationTimestamp) {
-        this.creationTimestamp = creationTimestamp; }
-    public void setSelected(Boolean selected) {
-        isSelected = selected;
-    }
+    private void setId(long id) { this.id = id; }
+    private void setProjectId(long projectId) { this.projectId = projectId; }
+    private void setName(@NonNull String name) { this.name = name; }
+    private void setCreationTimestamp(long creationTimestamp) { this.creationTimestamp = creationTimestamp; }
+    public void setSelected(Boolean selected) { isSelected = selected; }
 
-    /**
-     * Comparator to sort task from A to Z
-     */
+    //  Comparator to sort task from A to Z
     public static class TaskAZComparator implements Comparator<Task> {
         @Override
         public int compare(Task left, Task right) {
@@ -101,9 +69,7 @@ public class Task {
         }
     }
 
-    /**
-     * Comparator to sort task from Z to A
-     */
+    // Comparator to sort task from Z to A
     public static class TaskZAComparator implements Comparator<Task> {
         @Override
         public int compare(Task left, Task right) {
@@ -111,9 +77,7 @@ public class Task {
         }
     }
 
-    /**
-     * Comparator to sort task from last created to first created
-     */
+    // Comparator to sort task from last created to first created
     public static class TaskRecentComparator implements Comparator<Task> {
         @Override
         public int compare(Task left, Task right) {
@@ -121,9 +85,7 @@ public class Task {
         }
     }
 
-    /**
-     * Comparator to sort task from first created to last created
-     */
+    // Comparator to sort task from first created to last created
     public static class TaskOldComparator implements Comparator<Task> {
         @Override
         public int compare(Task left, Task right) {

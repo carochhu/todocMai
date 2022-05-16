@@ -27,12 +27,8 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * @author Gaëtan HERFRAY
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
+// Instrumented test, which will execute on an Android device.
+
 @RunWith(AndroidJUnit4.class)
 public class MainActivityInstrumentedTest {
     MainActivity mainActivityBinding;

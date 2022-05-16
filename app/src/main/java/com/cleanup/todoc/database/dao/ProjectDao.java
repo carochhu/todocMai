@@ -7,7 +7,6 @@ import androidx.room.Query;
 
 import com.cleanup.todoc.model.Project;
 
-
 @Dao
 public interface ProjectDao {
     @Query("select * from Project")

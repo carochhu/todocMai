@@ -12,11 +12,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 
-/**
- * Unit tests for tasks
- *
- * @author Gaëtan HERFRAY
- */
+// Unit tests for tasks
 public class TaskUnitTest {
     @Test
     public void test_projects() {

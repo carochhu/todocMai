@@ -35,7 +35,6 @@ public class TaskDaoTest {
     private static final long PROJECT_ID = 1;
     private static final Project PROJECT_DEMO = new Project(PROJECT_ID, "Philippe", 11221149);
 
-
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
@@ -84,8 +83,6 @@ public class TaskDaoTest {
         List<Task> tasks2 = taskDao.getTasks();
         assertEquals(0,tasks2.size());
     }
-
-
 
     @Test
     public void insertAndGetProject() throws InterruptedException {
